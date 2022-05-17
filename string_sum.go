@@ -28,8 +28,8 @@ var (
 
 func StringSum(input string) (output string, err error) {
 	input = strings.Join(strings.Fields(input), "")
-	if "" == input {
-		return "", fmt.Errorf(errorEmptyInput.Error())
+	if input == "" {
+		return "", fmt.Errorf("%w", errorEmptyInput)
 	}
 	p := regexp.MustCompile(`[+-]?[^+-]+`)
 	s := p.FindAllString(input, -1)
@@ -37,12 +37,12 @@ func StringSum(input string) (output string, err error) {
 	for _, v := range s {
 		t, err := strconv.Atoi(v)
 		if nil != err {
-			return "", fmt.Errorf(err.Error())
+			return "", fmt.Errorf("%w", err)
 		}
 		a = append(a, t)
 	}
-	if 1 != len(a) {
-		return "", fmt.Errorf(errorNotTwoOperands.Error())
+	if len(a) == 2 {
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 	return strconv.Itoa(a[0] + a[1]), nil
 }
