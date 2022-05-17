@@ -28,7 +28,7 @@ var (
 
 func StringSum(input string) (output string, err error) {
 	input = strings.Join(strings.Fields(input), "")
-	if "" == input {
+	if input == "" {
 		return "", fmt.Errorf(errorEmptyInput.Error())
 	}
 	p := regexp.MustCompile(`[+-]?[^+-]+`)
@@ -41,7 +41,7 @@ func StringSum(input string) (output string, err error) {
 		}
 		a = append(a, t)
 	}
-	if 1 != len(a) {
+	if len(a) == 2 {
 		return "", fmt.Errorf(errorNotTwoOperands.Error())
 	}
 	return strconv.Itoa(a[0] + a[1]), nil
