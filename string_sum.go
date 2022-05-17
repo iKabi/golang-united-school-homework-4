@@ -33,7 +33,7 @@ func StringSum(input string) (output string, err error) {
 	}
 	p := regexp.MustCompile(`[+-]?[^+-]+`)
 	s := p.FindAllString(input, -1)
-	a := make([]int, len(s))
+	a := make([]int, 0, len(s))
 	for _, v := range s {
 		t, err := strconv.Atoi(v)
 		if nil != err {
@@ -41,7 +41,7 @@ func StringSum(input string) (output string, err error) {
 		}
 		a = append(a, t)
 	}
-	if len(a) == 2 {
+	if len(a) != 2 {
 		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 	return strconv.Itoa(a[0] + a[1]), nil
